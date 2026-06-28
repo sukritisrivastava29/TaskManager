@@ -1,6 +1,4 @@
-/* ===========================
-   DESIGN TOKENS
-=========================== */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap');
 
 :root{
   --primary:#2563eb;
@@ -30,15 +28,11 @@
     border-color .25s ease;
 }
 
-/* ===========================
-   RESET
-=========================== */
-
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:"Inter",sans-serif;
+ font-family:"Plus Jakarta Sans",sans-serif;
 }
 
 html{
@@ -72,10 +66,6 @@ video{
   height:auto;
 }
 
-/* ===========================
-   LAYOUT
-=========================== */
-
 #root{
   min-height:100vh;
 }
@@ -85,10 +75,6 @@ video{
     margin:auto;
     padding:30px 24px;
 }
-
-/* ===========================
-   NAVBAR
-=========================== */
 
 .navbar{
   background:linear-gradient(135deg,var(--primary),var(--secondary));
@@ -143,10 +129,6 @@ video{
   opacity:.9;
 }
 
-/* ===========================
-   DASHBOARD STATS
-=========================== */
-
 .stats-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -199,10 +181,6 @@ video{
   color:#666;
   font-weight:500;
 }
-/* ===========================
-   FORM
-=========================== */
-
 .form-card{
   background:rgba(255,255,255,.88);
   padding:28px;
@@ -234,10 +212,6 @@ video{
   grid-template-columns:repeat(2,1fr);
   gap:18px;
 }
-
-/* ===========================
-   INPUTS
-=========================== */
 
 input,
 textarea,
@@ -273,10 +247,6 @@ textarea::placeholder{
   color:#94a3b8;
 }
 
-/* ===========================
-   BUTTONS
-=========================== */
-
 button{
   border:none;
   cursor:pointer;
@@ -307,10 +277,6 @@ button:active{
   box-shadow:0 14px 30px rgba(37,99,235,.25);
 }
 
-/* ===========================
-   FILTER BAR
-=========================== */
-
 .filter-bar{
   display:grid;
   grid-template-columns:2fr 1fr 1fr;
@@ -318,19 +284,11 @@ button:active{
   margin-bottom:30px;
 }
 
-/* ===========================
-   TASK GRID
-=========================== */
-
 .task-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
   gap:24px;
 }
-
-/* ===========================
-   TASK CARD
-=========================== */
 
 .task-card{
   background:rgba(255,255,255,.92);
@@ -386,10 +344,6 @@ button:active{
   font-size:15px;
 }
 
-/* ===========================
-   ACTION BUTTONS
-=========================== */
-
 .actions{
   display:flex;
   gap:12px;
@@ -428,10 +382,6 @@ button:active{
   transform:translateY(-2px);
   filter:brightness(1.05);
 }
-/* ===========================
-   BADGES
-=========================== */
-
 .badge{
   display:inline-flex;
   align-items:center;
@@ -452,10 +402,6 @@ button:active{
 .in-progress{background:#3b82f6;}
 .completed{background:#10b981;}
 
-/* ===========================
-   TASK HEADER
-=========================== */
-
 .tasks-header{
   display:flex;
   justify-content:space-between;
@@ -473,10 +419,6 @@ button:active{
   font-size:.9rem;
   font-weight:600;
 }
-
-/* ===========================
-   EMPTY STATE
-=========================== */
 
 .empty-state{
   background:#fff;
@@ -515,10 +457,6 @@ button:active{
   line-height:1.6;
 }
 
-/* ===========================
-   THEME TOGGLE
-=========================== */
-
 .top-bar{
   position:relative;
 }
@@ -548,10 +486,6 @@ button:active{
 .theme-toggle:hover{
   transform:scale(1.05);
 }
-
-/* ===========================
-   DARK MODE
-=========================== */
 
 .dark{
   background:#0f172a;
@@ -596,10 +530,6 @@ button:active{
   color:#cbd5e1;
 }
 
-/* ===========================
-   SCROLLBAR
-=========================== */
-
 ::-webkit-scrollbar{
   width:10px;
 }
@@ -616,10 +546,6 @@ button:active{
 ::-webkit-scrollbar-thumb:hover{
   background:#64748b;
 }
-
-/* ===========================
-   RESPONSIVE
-=========================== */
 
 @media (max-width:992px){
 
