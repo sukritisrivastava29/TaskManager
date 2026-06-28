@@ -16,6 +16,7 @@ export const createTask = async (req, res) => {
     res.status(201).json(task);
   } catch (err) {
     console.log(err);
+    toast.error("Failed to create task.");
     res.status(400).json({ message: err.message });
   }
 };
@@ -34,6 +35,7 @@ export const updateTask = async (req, res) => {
     res.json(task);
   } catch (err) {
     console.log(err);
+    toast.error("Failed to update task.");
     res.status(400).json({ message: err.message });
   }
 };
@@ -49,6 +51,7 @@ export const deleteTask = async (req, res) => {
     res.json({ message: "Task Deleted" });
   } catch (err) {
     console.log(err);
+    toast.error("Failed to delete task.");
     res.status(400).json({ message: err.message });
   }
 };

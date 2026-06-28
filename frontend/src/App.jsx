@@ -174,14 +174,15 @@ function App() {
           setPriorityFilter={setPriorityFilter}
         />
 
-        <div className="task-header">
-          <h2>Tasks</h2>
+     <div className="tasks-header">
+  <h2>Tasks</h2>
 
-          <span className="task-count">
-            {filteredTasks.length}{" "}
-            {filteredTasks.length === 1 ? "Task" : "Tasks"}
-          </span>
-        </div>
+  {filteredTasks.length > 0 && (
+    <span className="tasks-count">
+      {filteredTasks.length} Task{filteredTasks.length !== 1 ? "s" : ""}
+    </span>
+  )}
+</div>
 
         {loading ? (
           <div className="empty-state">
