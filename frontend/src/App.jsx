@@ -1,107 +1,137 @@
 import { useEffect, useState } from "react";
 import API from "./services/api";
+import Navbar from "./components/Navbar";
+import TaskForm from "./components/TaskForm";
+import FilterBar from "./components/FilterBar";
+import TaskList from "./components/TaskList";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
-  const [form, setForm] = useState({
+  const emptyForm = {
     title: "",
     description: "",
     priority: "Medium",
     status: "Pending",
     dueDate: "",
-  });
-
-  const fetchTasks = async () => {
-    const res = await API.get("/tasks");
-    setTasks(res.data);
   };
+
+  const [tasks, setTasks] = useState([]);
+  const [form, setForm] = useState(emptyForm);
+  const [editingTask, setEditingTask] = useState(null);
+
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
+  const [priorityFilter, setPriorityFilter] = useState("All");
 
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const fetchTasks = async () => {
+    try {
+      const res = await API.get("/tasks");
+      setTasks(res.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const addTask = async (e) => {
+  const handleChange = (e) => {
+    setForm((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await API.post("/tasks", form);
+    try {
+      if (editingTask) {
+        await API.put(`/tasks/${editingTask._id}`, form);
+      } else {
+        await API.post("/tasks", form);
+      }
+
+      setForm(emptyForm);
+      setEditingTask(null);
+      fetchTasks();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleEdit = (task) => {
+    setEditingTask(task);
 
     setForm({
-      title: "",
-      description: "",
-      priority: "Medium",
-      status: "Pending",
-      dueDate: "",
+      title: task.title,
+      description: task.description,
+      priority: task.priority,
+      status: task.status,
+      dueDate: task.dueDate?.split("T")[0],
     });
 
-    fetchTasks();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
-  const deleteTask = async (id) => {
-    await API.delete(`/tasks/${id}`);
-    fetchTasks();
+  const handleDelete = async (id) => {
+    if (!window.confirm("Delete this task?")) return;
+
+    try {
+      await API.delete(`/tasks/${id}`);
+      fetchTasks();
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  const filteredTasks = tasks.filter((task) => {
+    const searchMatch = task.title
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    const statusMatch =
+      statusFilter === "All" || task.status === statusFilter;
+
+    const priorityMatch =
+      priorityFilter === "All" || task.priority === priorityFilter;
+
+    return searchMatch && statusMatch && priorityMatch;
+  });
 
   return (
-    <div className="container">
-      <h1>Task Manager</h1>
+    <>
+      <Navbar />
 
-      <form onSubmit={addTask}>
-        <input
-          name="title"
-          placeholder="Title"
-          value={form.title}
-          onChange={handleChange}
-          required
+      <div className="container">
+
+        <TaskForm
+          form={form}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          editingTask={editingTask}
         />
 
-        <textarea
-          name="description"
-          placeholder="Description"
-          value={form.description}
-          onChange={handleChange}
-          required
+        <FilterBar
+          search={search}
+          setSearch={setSearch}
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+          priorityFilter={priorityFilter}
+          setPriorityFilter={setPriorityFilter}
         />
 
-        <select
-          name="priority"
-          value={form.priority}
-          onChange={handleChange}
-        >
-          <option>Low</option>
-          <option>Medium</option>
-          <option>High</option>
-        </select>
-
-        <input
-          type="date"
-          name="dueDate"
-          value={form.dueDate}
-          onChange={handleChange}
-          required
+        <TaskList
+          tasks={filteredTasks}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
         />
 
-        <button>Add Task</button>
-      </form>
-
-      <div className="grid">
-        {tasks.map((task) => (
-          <div className="card" key={task._id}>
-            <h3>{task.title}</h3>
-            <p>{task.description}</p>
-            <p>{task.priority}</p>
-            <p>{task.status}</p>
-
-            <button onClick={() => deleteTask(task._id)}>
-              Delete
-            </button>
-          </div>
-        ))}
       </div>
-    </div>
+    </>
   );
 }
 
