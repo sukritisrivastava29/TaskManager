@@ -7,7 +7,9 @@ import taskRoutes from "./routes/taskRoutes.js";
 dotenv.config();
 
 const app = express();
-
+app.get("/", (req, res) => {
+  res.send("Task Manager API is running...");
+});
 app.use(cors());
 app.use(express.json());
 

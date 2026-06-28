@@ -4,8 +4,9 @@ export const getTasks = async (req, res) => {
   try {
     const tasks = await Task.find().sort({ createdAt: -1 });
     res.json(tasks);
-  } catch {
-    res.status(500).json({ message: "Server Error" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -13,8 +14,9 @@ export const createTask = async (req, res) => {
   try {
     const task = await Task.create(req.body);
     res.status(201).json(task);
-  } catch {
-    res.status(400).json({ message: "Invalid Data" });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: err.message });
   }
 };
 
@@ -22,19 +24,31 @@ export const updateTask = async (req, res) => {
   try {
     const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
+      runValidators: true,
     });
 
+    if (!task) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
     res.json(task);
-  } catch {
-    res.status(400).json({ message: "Update Failed" });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: err.message });
   }
 };
 
 export const deleteTask = async (req, res) => {
   try {
-    await Task.findByIdAndDelete(req.params.id);
+    const task = await Task.findByIdAndDelete(req.params.id);
+
+    if (!task) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
     res.json({ message: "Task Deleted" });
-  } catch {
-    res.status(400).json({ message: "Delete Failed" });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: err.message });
   }
 };
