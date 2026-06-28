@@ -439,9 +439,7 @@ margin-bottom:4px;
 color:#666;
 font-weight:500;
 }
-/* ==========================
-THEME TOGGLE
-========================== */
+/* ==THEME TOGGLE== */
 
 .top-bar{
 position:relative;
@@ -538,5 +536,275 @@ right:18px;
 width:46px;
 height:46px;
 }
+
+}
+/* ===== NAVBAR IMPROVEMENT ===== */
+
+.logo-section{
+display:flex;
+align-items:center;
+gap:18px;
+}
+
+.logo-circle{
+width:60px;
+height:60px;
+border-radius:18px;
+background:rgba(255,255,255,.18);
+display:flex;
+justify-content:center;
+align-items:center;
+
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.logo-circle svg{
+color:white;
+}
+
+.navbar h1{
+font-size:2rem;
+font-weight:800;
+}
+
+.navbar p{
+opacity:.9;
+margin-top:6px;
+font-size:.95rem;
+}
+
+/* Prevent horizontal scrolling */
+html,
+body,
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Better box sizing */
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive container */
+.container {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Navbar */
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.logo-section h1,
+.logo-section p {
+  word-break: break-word;
+}
+
+/* Dashboard Cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+/* Filter Bar */
+.filter-bar {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 16px;
+}
+
+/* Form */
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* Inputs */
+input,
+textarea,
+select,
+button {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Task Grid */
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* Cards */
+.task-card {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.card-top h3 {
+  flex: 1;
+  word-break: break-word;
+}
+
+.description {
+  word-break: break-word;
+}
+
+/* Buttons */
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.actions button {
+  flex: 1 1 140px;
+}
+
+/* Long text */
+h1,
+h2,
+h3,
+p,
+span {
+  overflow-wrap: anywhere;
+}
+
+/* =======================
+   TABLET
+======================= */
+
+@media (max-width: 992px) {
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filter-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .task-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+/* === MOBILE===*/
+
+@media (max-width: 768px) {
+
+  .navbar {
+    padding: 20px;
+  }
+
+  .nav-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo-section {
+    width: 100%;
+  }
+
+  .theme-toggle {
+    position: fixed;
+    right: 18px;
+    bottom: 20px;
+    top: auto;
+    z-index: 999;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+
+  .task-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+}
+
+/* =======================
+   SMALL PHONES
+======================= */
+
+@media (max-width: 480px) {
+
+  body {
+    font-size: 14px;
+  }
+
+  .navbar h1 {
+    font-size: 1.6rem;
+  }
+
+  .navbar p {
+    font-size: .9rem;
+  }
+
+  .form-card,
+  .task-card {
+    padding: 16px;
+  }
+
+  .stat-card {
+    padding: 18px;
+  }
+
+  .stat-card h2 {
+    font-size: 24px;
+  }
+
+  .logo-circle {
+    width: 52px;
+    height: 52px;
+  }
+
+  .theme-toggle {
+    width: 46px;
+    height: 46px;
+  }
 
 }

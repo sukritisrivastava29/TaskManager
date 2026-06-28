@@ -1,14 +1,23 @@
+import { CheckSquare } from "lucide-react";
+
 function Navbar() {
   return (
-    <nav className="navbar">
+    <header className="navbar">
       <div className="nav-content">
-        <h1>📋 Task Manager</h1>
 
-        <p>
-          Organize • Prioritize • Complete
-        </p>
+        <div className="logo-section">
+          <div className="logo-circle">
+            <CheckSquare size={28} />
+          </div>
+
+          <div>
+            <h1>TaskFlow</h1>
+            <p>Manage your work beautifully.</p>
+          </div>
+        </div>
+
       </div>
-    </nav>
+    </header>
   );
 }
 
